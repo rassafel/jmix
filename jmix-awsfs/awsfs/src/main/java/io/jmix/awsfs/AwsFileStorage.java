@@ -245,7 +245,7 @@ public class AwsFileStorage implements FileStorage {
         } catch (IOException | SdkException e) {
             log.error("Error saving file to S3 storage", e);
             String message = String.format("Could not save file %s.", fileName);
-            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message);
+            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message, e);
         }
     }
 
@@ -262,7 +262,7 @@ public class AwsFileStorage implements FileStorage {
         } catch (SdkException e) {
             log.error("Error loading file from S3 storage", e);
             String message = String.format("Could not load file %s.", reference.getFileName());
-            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message);
+            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message, e);
         }
         return is;
     }
@@ -279,7 +279,7 @@ public class AwsFileStorage implements FileStorage {
         } catch (SdkException e) {
             log.error("Error removing file from S3 storage", e);
             String message = String.format("Could not delete file %s.", reference.getFileName());
-            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message);
+            throw new FileStorageException(FileStorageException.Type.IO_EXCEPTION, message, e);
         }
     }
 
